@@ -4,7 +4,7 @@
 
 int main() {
 
-    LRUCache<std::string,4> ca;
+    v1::LRUCache<std::string,4> ca;
 
     ca.refer("1");
     ca.refer("2");
