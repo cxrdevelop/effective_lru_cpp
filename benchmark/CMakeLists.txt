@@ -1,5 +1,7 @@
 file(GLOB SRC_BENCHMARK_FILES
 	"*.cpp"
+        "*.h"
+        "*.hpp"
 )
 
 add_executable(effective_lru-benchmark

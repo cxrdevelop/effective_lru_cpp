@@ -1,9 +1,7 @@
-#ifndef LRU_HPP
-#define LRU_HPP
+#pragma once
 
 #include <list>
 #include <unordered_map>
-#include <iostream>
 
 namespace v1 {
 
@@ -16,6 +14,9 @@ class LRUCache {
 public:
     using iterator = typename list_t::iterator;
     using const_iterator = typename list_t::const_iterator;
+    using value_type = T;
+    using size_type = decltype(N);
+    static constexpr std::size_t size = N;
 
     constexpr const_iterator cbegin() const noexcept(noexcept(std::cbegin(std::list<T>{}))) {
         return std::cbegin(list_);
@@ -61,27 +62,5 @@ public:
         }
         return true;
     }
-
-    void refer(T x) {
-        // not present in cache
-        if (map_.find(x) == map_.end()) {
-            if (list_.size() == N) {
-                // delete least recently used element
-                const T& last = list_.back();
-                // Erase the last
-                map_.erase(last);
-
-                // Pops the last element
-                list_.pop_back();
-            }
-        } else {
-            list_.erase(map_[x]);
-        }
-
-        // update reference
-        list_.push_front(x);
-        map_[x] = list_.begin();
-    }
 };
 }
-#endif // LRU_HPP
